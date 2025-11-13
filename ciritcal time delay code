@@ -1,0 +1,56 @@
+import pandas as pd
+import numpy as np
+import math
+import matplotlib.pyplot as plt
+
+# Load combined CSV with columns: time (ISO), spread
+df = pd.read_csv("combined_with_spread_and_signals.csv", parse_dates=['time'])
+df = df.sort_values('time').reset_index(drop=True)
+dt = (df['time'].iloc[1] - df['time'].iloc[0]).total_seconds()  # sampling interval in seconds
+
+# compute ds/dt (forward diff)
+df['ds_dt'] = df['spread'].diff() / dt
+df = df.dropna(subset=['ds_dt','spread']).reset_index(drop=True)
+
+# candidate lags (in seconds). For example, if dt=1s and you want up to 10s:
+max_lag_seconds = 60  # adjust to your desired search window
+lags = np.arange(0, max_lag_seconds+1, dt)  # multiples of dt
+k_estimates = []
+tau_c_values = []
+
+for tau in lags:
+    lag_steps = int(round(tau/dt))
+    if lag_steps == 0:
+        s_lag = df['spread'].values
+    else:
+        s_lag = np.concatenate([np.full(lag_steps, np.nan), df['spread'].values[:-lag_steps]])
+    mask = ~np.isnan(s_lag)
+    s_lag = s_lag[mask]
+    dsdt = df['ds_dt'].values[mask]
+    if len(s_lag) < 10:
+        k_estimates.append(np.nan)
+        tau_c_values.append(np.nan)
+        continue
+    # closed-form OLS for ds_dt = -k * s_lag
+    num = -np.sum(s_lag * dsdt)
+    den = np.sum(s_lag**2)
+    k_hat = num/den if den!=0 else np.nan
+    k_estimates.append(k_hat)
+    tau_c_values.append(math.pi/(2*k_hat) if (k_hat>0) else np.nan)
+
+# Plot k_hat vs tau and tau_c vs tau
+plt.figure(figsize=(10,4))
+plt.plot(lags, k_estimates, marker='o')
+plt.xlabel('Assumed delay τ (s)')
+plt.ylabel('Estimated k̂(τ) (s^{-1})')
+plt.title('Estimated feedback gain vs assumed delay')
+plt.grid(True)
+plt.show()
+
+plt.figure(figsize=(10,4))
+plt.plot(lags, tau_c_values, marker='o')
+plt.xlabel('Assumed delay τ (s)')
+plt.ylabel('Estimated critical delay τ_c(τ) (s) (NaN if k̂<=0)')
+plt.title('Estimated τ_c from k̂(τ)')
+plt.grid(True)
+plt.show()
