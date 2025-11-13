@@ -1,102 +1,173 @@
 \documentclass[12pt]{article}
-\usepackage{graphicx}
+
+% ---------------------------------------------------------
+% PACKAGES
+% ---------------------------------------------------------
+\usepackage{amsmath, amssymb, siunitx, graphicx, float, booktabs}
 \usepackage[margin=1in]{geometry}
-\usepackage{caption}
-\usepackage{float}
-\title{Arbitrage Project — Draft Report}
-\author{Nicholas Nguyen \and Team}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
+\setlength{\parskip}{0.8em}
+\setlength{\parindent}{0pt}
+
+% ---------------------------------------------------------
+% TITLE
+% ---------------------------------------------------------
+\title{\textbf{High-Frequency Arbitrage Analysis between Binance and Coinbase}}
+\author{Nicholas Nguyen, Jay Patel, Nelson Siu}
 \date{\today}
 
+% ---------------------------------------------------------
+% DOCUMENT
+% ---------------------------------------------------------
 \begin{document}
 \maketitle
+\tableofcontents
+\newpage
 
+% ---------------------------------------------------------
 \section{Introduction}
-This draft report uses hypothetical aligned CSV data (Binance and Coinbase) to showcase the analysis
-pipeline for latency arbitrage. Figures are saved separately and indicated below where to include them.
+This report presents a complete arbitrage analysis framework designed to detect and exploit short-term mispricings between the Binance and Coinbase cryptocurrency exchanges. While the data used in this version are synthetic and meant for demonstration, the framework is compatible with real-time or historical tick-level data (second- or millisecond-level resolution) when integrated with live APIs.
 
-\section{Data and Preprocessing}
-Data used are the generated CSVs with ISO-8601 UTC timestamps. The two price series are merged on a common time index.
-Columns include: \texttt{time}, \texttt{binance}, \texttt{coinbase}, \texttt{spread}, \texttt{spread\_z},
-\texttt{position}, \texttt{m2m\_pnl}, \texttt{cumulative\_pnl}.
+The objective is to model the spread between prices, identify mean-reversion behavior, and simulate trades based on a rolling z-score strategy. The analysis outputs include spread evolution, signal generation, trade markers, cumulative and mark-to-market profit and loss (P\&L), and return correlation between the two markets.
 
-\section{Exploratory Plots}
-% Figure 1: Price series
-\begin{figure}[H]
+% ---------------------------------------------------------
+\section{Data Description and Preprocessing}
+For this demonstration, the data were generated to mimic real BTC/USD pricing behavior across two exchanges with micro deviations to emulate cross-exchange inefficiencies. Each row represents one-minute aligned timestamps in ISO 8601 UTC format.
+
+The preprocessing steps were:
+\begin{enumerate}
+    \item Align Binance and Coinbase price data by timestamp.
+    \item Compute the instantaneous spread: 
+    \[
+    s(t) = P_{Binance}(t) - P_{Coinbase}(t)
+    \]
+    \item Calculate rolling mean and standard deviation over a 30-period window to normalize the spread:
+    \[
+    z(t) = \frac{s(t) - \mu_s(t)}{\sigma_s(t)}
+    \]
+    \item Generate trading signals when $|z(t)| > 2$ (entry) and close when $|z(t)| < 0.5$.
+\end{enumerate}
+
+\begin{table}[H]
 \centering
-\includegraphics[width=0.9\textwidth]{figure1_price_series.png}
-\caption{Binance and Coinbase price series (hypothetical). Insert \texttt{figure1_price_series.png} here.}
+\begin{tabular}{lcc}
+\toprule
+Column Name & Description & Units \\
+\midrule
+\texttt{time} & Timestamp (UTC) & ISO 8601 \\
+\texttt{binance} & Binance mid-price & USD \\
+\texttt{coinbase} & Coinbase mid-price & USD \\
+\texttt{spread} & Price difference (Binance - Coinbase) & USD \\
+\texttt{spread\_z} & Rolling z-score of spread & unitless \\
+\texttt{position} & Current open trade (+1/-1/0) & unitless \\
+\texttt{m2m\_pnl} & Mark-to-market P\&L & USD \\
+\texttt{cumulative\_pnl} & Realized P\&L & USD \\
+\bottomrule
+\end{tabular}
+\caption{Summary of data columns used in the arbitrage analysis.}
+\end{table}
+
+% ---------------------------------------------------------
+\section{Exploratory Analysis and Visualization}
+
+\subsection{Price Series}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figure1_price_series.png}
+    \caption{Hypothetical Binance and Coinbase BTC/USD price series over time. The minor fluctuations between the two exchanges mimic latency-driven price discrepancies.}
 \end{figure}
 
-% Figure 2: Spread
+\subsection{Spread Evolution}
 \begin{figure}[H]
-\centering
-\includegraphics[width=0.9\textwidth]{figure2_spread.png}
-\caption{Spread (Binance - Coinbase). Insert \texttt{figure2_spread.png} here.}
+    \centering
+    \includegraphics[width=0.9\textwidth]{figure2_spread.png}
+    \caption{Spread ($P_{Binance} - P_{Coinbase}$) showing persistent oscillation around zero. These deviations represent potential arbitrage entry points.}
 \end{figure}
 
-% Figure 3: Spread Z-score
+\subsection{Normalized Spread (Z-Score)}
 \begin{figure}[H]
-\centering
-\includegraphics[width=0.9\textwidth]{figure3_spread_zscore.png}
-\caption{Spread z-score (rolling window). Insert \texttt{figure3_spread_zscore.png} here.}
+    \centering
+    \includegraphics[width=0.9\textwidth]{figure3_spread_zscore.png}
+    \caption{Z-score of the spread computed over a rolling 30-minute window. High-magnitude z-scores indicate possible arbitrage opportunities when spreads deviate from equilibrium.}
 \end{figure}
 
-% Figure 4: Spread markers
+\subsection{Entry and Exit Markers}
 \begin{figure}[H]
-\centering
-\includegraphics[width=0.9\textwidth]{figure4_spread_markers.png}
-\caption{Spread with entry (^) and exit (v) markers. Insert \texttt{figure4_spread_markers.png} here.}
+    \centering
+    \includegraphics[width=0.9\textwidth]{figure4_spread_markers.png}
+    \caption{Spread evolution with entry (upward triangles) and exit (downward triangles) markers based on the z-score thresholds. Positive z-score entries indicate selling Binance and buying Coinbase, and vice versa.}
 \end{figure}
 
-% Figure 5: Cumulative PnL
+\subsection{Cumulative Realized P\&L}
 \begin{figure}[H]
-\centering
-\includegraphics[width=0.9\textwidth]{figure5_cum_pnl.png}
-\caption{Cumulative realized P\&L from closed trades. Insert \texttt{figure5_cum_pnl.png} here.}
+    \centering
+    \includegraphics[width=0.9\textwidth]{figure5_cum_pnl.png}
+    \caption{Cumulative realized P\&L from executed trades. Despite transaction cost neglect, the shape indicates the potential profitability of the mean-reversion arbitrage approach.}
 \end{figure}
 
-% Figure 6: M2M
+\subsection{Mark-to-Market (Unrealized) P\&L}
 \begin{figure}[H]
-\centering
-\includegraphics[width=0.9\textwidth]{figure6_m2m.png}
-\caption{Mark-to-market (unrealized) P\&L while a trade is open. Insert \texttt{figure6_m2m.png} here.}
+    \centering
+    \includegraphics[width=0.9\textwidth]{figure6_m2m.png}
+    \caption{Mark-to-market (unrealized) P\&L showing fluctuations during open positions. It captures intratrade volatility before final realization.}
 \end{figure}
 
-% Figure 7: Histogram (if exists)
+\subsection{Distribution of Trade Profits}
 \begin{figure}[H]
-\centering
-\includegraphics[width=0.6\textwidth]{figure7_hist_pnl.png}
-\caption{Histogram of trade PnL. Insert \texttt{figure7_hist_pnl.png} here. If no trades were generated, this figure can be omitted.}
+    \centering
+    \includegraphics[width=0.8\textwidth]{figure7_hist_pnl.png}
+    \caption{Histogram of per-trade realized P\&L. The distribution suggests that most trades cluster near zero profit, consistent with small, frequent arbitrage captures.}
 \end{figure}
 
-% Figure 8: Rolling correlation
+\subsection{Rolling Return Correlation}
 \begin{figure}[H]
-\centering
-\includegraphics[width=0.9\textwidth]{figure8_rolling_corr.png}
-\caption{Rolling correlation of log returns (30-min window). Insert \texttt{figure8_rolling_corr.png} here.}
+    \centering
+    \includegraphics[width=0.9\textwidth]{figure8_rolling_corr.png}
+    \caption{Rolling correlation (30-minute window) of log returns between Binance and Coinbase. Strong co-movement ($r \approx 1$) reflects market efficiency, while short-term dips suggest temporary desynchronization exploitable for arbitrage.}
 \end{figure}
 
-\section{Preliminary Results and Figures}
-The toy backtest uses a simple mean-reversion entry/exit strategy on spread z-score. Summary statistics and
-trade table (if any) should be inserted here. For real-data runs, add transaction costs, exchange fees,
-and slippage to produce realistic P\&L numbers.
-
-\section{Very Rough Draft: Discussion \& Next Steps}
+% ---------------------------------------------------------
+\section{Preliminary Results and Insights}
+Even in the synthetic test case, the strategy identifies clear high-z-score moments corresponding to profitable opportunities. The framework demonstrates that:
 \begin{itemize}
-  \item The synthetic example demonstrates the full analysis pipeline: preprocessing, spread computation, z-score signal generation, backtest, and visualization.
-  \item Next: run the pipeline with real tick data (Binance trades, Coinbase trades), recompute spread at higher frequency (seconds or ms), and repeat stability analysis from our DDE model to estimate critical delay $\tau_c$.
-  \item Incorporate realistic transaction costs (maker/taker), exchange transfer times, and order book depth simulation.
-  \item Produce a stability map comparing theoretical $\tau_c$ to empirical PnL decay as a function of latency.
+    \item The spread oscillates around zero, confirming short-term mispricings.
+    \item Z-score normalization provides an effective basis for entry/exit signal generation.
+    \item The resulting P\&L trajectory shows positive drift under ideal conditions (no slippage, latency, or fees).
 \end{itemize}
 
-\section{Files included}
+This foundation can be applied to real tick data with adjustments for:
 \begin{itemize}
-  \item \texttt{binance_forced_string.csv}
-  \item \texttt{coinbase_forced_string.csv}
-  \item \texttt{combined_with_spread_and_signals.csv}
-  \item Image files: \texttt{figure1\_price\_series.png}, \texttt{figure2\_spread.png}, \texttt{figure3\_spread\_zscore.png},
-  \texttt{figure4\_spread\_markers.png}, \texttt{figure5\_cum_pnl.png}, \texttt{figure6\_m2m.png}, \texttt{figure7\_hist\_pnl.png} (if present),
-  \texttt{figure8\_rolling\_corr.png}.
+    \item Exchange latency and order-book microstructure.
+    \item Maker-taker fee asymmetry.
+    \item Transfer constraints between exchanges.
+\end{itemize}
+
+% ---------------------------------------------------------
+\section{Conclusion and Next Steps}
+This project establishes a complete arbitrage modeling workflow:
+\begin{enumerate}
+    \item Align tick-level data between exchanges.
+    \item Compute spreads and normalized z-scores.
+    \item Generate and backtest mean-reversion-based trading signals.
+    \item Visualize dynamics and profitability metrics.
+\end{enumerate}
+
+\textbf{Future work} will incorporate:
+\begin{itemize}
+    \item True millisecond-resolution tick data from Binance and Coinbase APIs.
+    \item Latency modeling and empirical estimation of delay sensitivity.
+    \item Dynamic position sizing, risk constraints, and transaction cost modeling.
+    \item Integration with a live data streaming system for real-time arbitrage signal generation.
+\end{itemize}
+
+\vfill
+\noindent\textbf{Files Included:}
+\begin{itemize}
+    \item \texttt{binance\_forced\_string.csv}
+    \item \texttt{coinbase\_forced\_string.csv}
+    \item \texttt{combined\_with\_spread\_and\_signals.csv}
+    \item Figures 1--8 as PNGs
 \end{itemize}
 
 \end{document}
