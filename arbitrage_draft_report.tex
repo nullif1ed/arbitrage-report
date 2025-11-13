@@ -128,6 +128,79 @@ Column Name & Description & Units \\
 \end{figure}
 
 % ---------------------------------------------------------
+% ---------------------------------------------------------
+\section{Critical Delay Estimation}
+\label{sec:criticaldelay}
+
+\subsection{Model Framework}
+To evaluate the temporal stability of the arbitrage feedback system, we model the spread dynamics between exchanges using a first-order delayed feedback differential equation:
+\begin{equation}
+    \frac{ds(t)}{dt} = -k\,s(t - \tau) + \eta(t),
+\end{equation}
+where $k > 0$ represents the mean-reversion or feedback gain, $\tau$ is the latency (reaction delay), and $\eta(t)$ is noise representing stochastic market disturbances.
+
+The equilibrium stability boundary for this delayed differential equation occurs when the characteristic equation
+\begin{equation}
+    \lambda + k e^{-\lambda \tau} = 0
+\end{equation}
+admits purely imaginary roots. Setting $\lambda = i\omega$ and separating real and imaginary parts yields
+\begin{align}
+    k \cos(\omega \tau) &= 0, \\
+    \omega - k \sin(\omega \tau) &= 0.
+\end{align}
+Solving for the smallest oscillatory mode ($\omega = k$, $\sin(\omega\tau) = 1$) gives the \textbf{critical delay}:
+\begin{equation}
+    \tau_c = \frac{\pi}{2k}.
+\end{equation}
+For $\tau < \tau_c$, the feedback loop is stable (mean-reverting); for $\tau > \tau_c$, delayed reaction introduces oscillatory instability.
+
+\subsection{Empirical Estimation of Feedback Gain}
+We estimate $k$ empirically from the observed spread series using the continuous-time approximation:
+\begin{equation}
+    \frac{ds}{dt} \approx -k\, s(t),
+\end{equation}
+which leads to a least-squares estimate
+\begin{equation}
+    \hat{k} = -\frac{\sum_t s(t)\, \dot{s}(t)}{\sum_t s(t)^2}.
+\end{equation}
+
+Using the synthetic aligned dataset generated earlier, we obtain
+\[
+    \hat{k} \approx -1.00\times10^{-4}\ \text{s}^{-1},
+\]
+which is negative in this toy example, implying that the model’s simplified feedback assumption does not hold for these random prices. Consequently, $\tau_c$ is undefined (non-physical) here. With real arbitrage data, positive $k$ values are expected, yielding a finite $\tau_c$ that characterizes how much latency the system can tolerate before instability.
+
+\subsection{Grid Search for Delay-Dependent Gain}
+To obtain $\hat{k}(\tau)$ for various assumed delays $\tau_0$, we regress
+\[
+    \frac{s_{t+\Delta}-s_t}{\Delta} \approx -k\, s_{t-\ell},
+\]
+where $\ell$ is the discrete lag corresponding to $\tau_0 = \ell \Delta$. We compute $\hat{k}(\tau_0)$ across a grid of candidate delays and evaluate the implied $\tau_c(\tau_0) = \pi / (2\hat{k}(\tau_0))$.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figure9_k_vs_tau.png}
+    \caption{Estimated feedback gain $\hat{k}(\tau)$ as a function of assumed delay $\tau$. Stable regions correspond to $\hat{k} > 0$.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figure10_tau_c_vs_tau.png}
+    \caption{Estimated critical delay $\tau_c(\tau)$ computed from $\hat{k}(\tau)$ using $\tau_c = \pi / (2\hat{k})$. Finite $\tau_c$ values indicate the predicted onset of instability due to latency.}
+\end{figure}
+
+\subsection{Interpretation}
+Figure~\ref{sec:criticaldelay} illustrates how reaction latency can destabilize arbitrage execution. If real exchange data exhibit positive mean-reversion strength ($k>0$), then:
+\[
+    \tau_c = \frac{\pi}{2k}
+\]
+quantifies the maximum permissible delay before oscillatory mispricing amplification occurs.
+
+Empirically, a high $\hat{k}$ implies stronger correction of spreads and smaller $\tau_c$ (system more sensitive to delay), while small $\hat{k}$ implies slower feedback and larger allowable latency.
+
+This theoretical framework connects directly to algorithmic trade execution speed, co-location strategies, and cross-exchange latency optimization.
+
+
 \section{Preliminary Results and Insights}
 Even in the synthetic test case, the strategy identifies clear high-z-score moments corresponding to profitable opportunities. The framework demonstrates that:
 \begin{itemize}
