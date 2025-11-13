@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.9.24)  12 NOV 2025 21:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.9.24)  12 NOV 2025 21:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -470,10 +470,12 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 Package hyperref Info: Link coloring ON on input line 23.
+(arbitrage_draft_report.out) (arbitrage_draft_report.out)
 \@outlinefile=\write3
 \openout3 = `arbitrage_draft_report.out'.
 
 LaTeX Font Info:    Trying to load font information for U+msa on input line 25.
+
 
 (C:\Users\nicho\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -484,64 +486,90 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 25.
 (C:\Users\nicho\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-No file arbitrage_draft_report.toc.
+(arbitrage_draft_report.toc)
 \tf@toc=\write4
 \openout4 = `arbitrage_draft_report.toc'.
 
-[1
+ [1
 
 {C:/Users/nicho/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2]
-<figure1_price_series.png, id=24, 722.7pt x 289.08pt>
+<figure1_price_series.png, id=87, 722.7pt x 289.08pt>
 File: figure1_price_series.png Graphic file (type png)
 <use figure1_price_series.png>
 Package pdftex.def Info: figure1_price_series.png  used on input line 77.
 (pdftex.def)             Requested size: 422.77664pt x 169.1089pt.
-<figure2_spread.png, id=26, 722.7pt x 289.08pt>
+<figure2_spread.png, id=89, 722.7pt x 289.08pt>
 File: figure2_spread.png Graphic file (type png)
 <use figure2_spread.png>
 Package pdftex.def Info: figure2_spread.png  used on input line 84.
 (pdftex.def)             Requested size: 422.77664pt x 169.1089pt.
-
-[3 <./figure1_price_series.png>]
-<figure3_spread_zscore.png, id=37, 722.7pt x 289.08pt>
+ [3 <./figure1_price_series.png>]
+<figure3_spread_zscore.png, id=98, 722.7pt x 289.08pt>
 File: figure3_spread_zscore.png Graphic file (type png)
 <use figure3_spread_zscore.png>
 Package pdftex.def Info: figure3_spread_zscore.png  used on input line 91.
 (pdftex.def)             Requested size: 422.77664pt x 169.1089pt.
-<figure4_spread_markers.png, id=38, 722.7pt x 289.08pt>
+<figure4_spread_markers.png, id=99, 722.7pt x 289.08pt>
 File: figure4_spread_markers.png Graphic file (type png)
 <use figure4_spread_markers.png>
 Package pdftex.def Info: figure4_spread_markers.png  used on input line 98.
 (pdftex.def)             Requested size: 422.77664pt x 169.1089pt.
  [4 <./figure2_spread.png> <./figure3_spread_zscore.png>]
-<figure5_cum_pnl.png, id=49, 722.7pt x 289.08pt>
+<figure5_cum_pnl.png, id=108, 722.7pt x 289.08pt>
 File: figure5_cum_pnl.png Graphic file (type png)
 <use figure5_cum_pnl.png>
 Package pdftex.def Info: figure5_cum_pnl.png  used on input line 105.
 (pdftex.def)             Requested size: 422.77664pt x 169.1089pt.
-<figure6_m2m.png, id=50, 722.7pt x 289.08pt>
+<figure6_m2m.png, id=109, 722.7pt x 289.08pt>
 File: figure6_m2m.png Graphic file (type png)
 <use figure6_m2m.png>
 Package pdftex.def Info: figure6_m2m.png  used on input line 112.
 (pdftex.def)             Requested size: 422.77664pt x 169.1089pt.
  [5 <./figure4_spread_markers.png> <./figure5_cum_pnl.png>]
-<figure7_hist_pnl.png, id=61, 578.16pt x 289.08pt>
+<figure7_hist_pnl.png, id=118, 578.16pt x 289.08pt>
 File: figure7_hist_pnl.png Graphic file (type png)
 <use figure7_hist_pnl.png>
 Package pdftex.def Info: figure7_hist_pnl.png  used on input line 119.
 (pdftex.def)             Requested size: 375.80544pt x 187.89977pt.
-<figure8_rolling_corr.png, id=62, 722.7pt x 289.08pt>
+<figure8_rolling_corr.png, id=119, 722.7pt x 289.08pt>
 File: figure8_rolling_corr.png Graphic file (type png)
 <use figure8_rolling_corr.png>
 Package pdftex.def Info: figure8_rolling_corr.png  used on input line 126.
 (pdftex.def)             Requested size: 422.77664pt x 169.1089pt.
  [6 <./figure6_m2m.png> <./figure7_hist_pnl.png>] [7 <./figure8_rolling_corr.pn
 g>]
-[8] (arbitrage_draft_report.aux)
+<figure9_k_vs_tau.png, id=142, 578.16pt x 289.08pt>
+File: figure9_k_vs_tau.png Graphic file (type png)
+<use figure9_k_vs_tau.png>
+Package pdftex.def Info: figure9_k_vs_tau.png  used on input line 182.
+(pdftex.def)             Requested size: 399.29463pt x 199.64626pt.
+<figure10_tau_c_vs_tau.png, id=143, 578.16pt x 289.08pt>
+File: figure10_tau_c_vs_tau.png Graphic file (type png)
+<use figure10_tau_c_vs_tau.png>
+Package pdftex.def Info: figure10_tau_c_vs_tau.png  used on input line 188.
+(pdftex.def)             Requested size: 399.29463pt x 199.64626pt.
+ [8 <./figure9_k_vs_tau.png>]
+
+LaTeX Warning: Reference `sec:criticaldelay' on page 9 undefined on input line 
+193.
+
+
+Overfull \hbox (1.6762pt too wide) in paragraph at lines 201--202
+[]\OT1/cmr/m/n/12 This the-o-ret-i-cal frame-work con-nects di-rectly to al-go-
+rith-mic trade ex-e-cu-tion speed, co-location
+ []
+
+[9 <./figure10_tau_c_vs_tau.png>] [10] (arbitrage_draft_report.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
+
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
 
 Package rerunfilecheck Warning: File `arbitrage_draft_report.out' has changed.
@@ -549,28 +577,32 @@ Package rerunfilecheck Warning: File `arbitrage_draft_report.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `arbitrage_draft_report.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  6FCA29C883DA9D735AFFB63F14419B61;2412.
+(rerunfilecheck)             Before: 6FCA29C883DA9D735AFFB63F14419B61;2412
+(rerunfilecheck)             After:  989733E9E9853AA00E9E31F6F0ECD4AA;3356.
  ) 
 Here is how much of TeX's memory you used:
- 14301 strings out of 474486
- 282979 string characters out of 5743755
- 1932542 words of memory out of 5000000
- 36405 multiletter control sequences out of 15000+600000
+ 14358 strings out of 474486
+ 284295 string characters out of 5743755
+ 1934542 words of memory out of 5000000
+ 36440 multiletter control sequences out of 15000+600000
  567645 words of font info for 73 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,9n,80p,449b,1110s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,9n,80p,449b,1079s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\nicho\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm
 1200.pk><C:/Users/nicho/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
 ts/cm/cmbx12.pfb><C:/Users/nicho/AppData/Local/Programs/MiKTeX/fonts/type1/publ
-ic/amsfonts/cm/cmmi12.pfb><C:/Users/nicho/AppData/Local/Programs/MiKTeX/fonts/t
-ype1/public/amsfonts/cm/cmmi8.pfb><C:/Users/nicho/AppData/Local/Programs/MiKTeX
-/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/nicho/AppData/Local/Program
-s/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/nicho/AppData/Loca
-l/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on arbitrage_draft_report.pdf (8 pages, 776133 bytes).
+ic/amsfonts/cm/cmex10.pfb><C:/Users/nicho/AppData/Local/Programs/MiKTeX/fonts/t
+ype1/public/amsfonts/cm/cmmi12.pfb><C:/Users/nicho/AppData/Local/Programs/MiKTe
+X/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/nicho/AppData/Local/Progra
+ms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/nicho/AppData/Loca
+l/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/nicho/AppDa
+ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/ni
+cho/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/
+Users/nicho/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12
+.pfb>
+Output written on arbitrage_draft_report.pdf (10 pages, 973536 bytes).
 PDF statistics:
- 133 PDF objects out of 1000 (max. 8388607)
- 40 named destinations out of 1000 (max. 500000)
- 41 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 230 PDF objects out of 1000 (max. 8388607)
+ 56 named destinations out of 1000 (max. 500000)
+ 155 words of extra memory for PDF output out of 10000 (max. 10000000)
 

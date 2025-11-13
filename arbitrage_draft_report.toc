@@ -9,5 +9,10 @@
 \contentsline {subsection}{\numberline {3.6}Mark-to-Market (Unrealized) P\&L}{6}{subsection.3.6}%
 \contentsline {subsection}{\numberline {3.7}Distribution of Trade Profits}{6}{subsection.3.7}%
 \contentsline {subsection}{\numberline {3.8}Rolling Return Correlation}{7}{subsection.3.8}%
-\contentsline {section}{\numberline {4}Preliminary Results and Insights}{7}{section.4}%
-\contentsline {section}{\numberline {5}Conclusion and Next Steps}{7}{section.5}%
+\contentsline {section}{\numberline {4}Critical Delay Estimation}{7}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Model Framework}{7}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Empirical Estimation of Feedback Gain}{8}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Grid Search for Delay-Dependent Gain}{8}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Interpretation}{9}{subsection.4.4}%
+\contentsline {section}{\numberline {5}Preliminary Results and Insights}{9}{section.5}%
+\contentsline {section}{\numberline {6}Conclusion and Next Steps}{10}{section.6}%
