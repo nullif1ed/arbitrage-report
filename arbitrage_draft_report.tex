@@ -1,0 +1,102 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage{caption}
+\usepackage{float}
+\title{Arbitrage Project — Draft Report}
+\author{Nicholas Nguyen \and Team}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+This draft report uses hypothetical aligned CSV data (Binance and Coinbase) to showcase the analysis
+pipeline for latency arbitrage. Figures are saved separately and indicated below where to include them.
+
+\section{Data and Preprocessing}
+Data used are the generated CSVs with ISO-8601 UTC timestamps. The two price series are merged on a common time index.
+Columns include: \texttt{time}, \texttt{binance}, \texttt{coinbase}, \texttt{spread}, \texttt{spread\_z},
+\texttt{position}, \texttt{m2m\_pnl}, \texttt{cumulative\_pnl}.
+
+\section{Exploratory Plots}
+% Figure 1: Price series
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figure1_price_series.png}
+\caption{Binance and Coinbase price series (hypothetical). Insert \texttt{figure1_price_series.png} here.}
+\end{figure}
+
+% Figure 2: Spread
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figure2_spread.png}
+\caption{Spread (Binance - Coinbase). Insert \texttt{figure2_spread.png} here.}
+\end{figure}
+
+% Figure 3: Spread Z-score
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figure3_spread_zscore.png}
+\caption{Spread z-score (rolling window). Insert \texttt{figure3_spread_zscore.png} here.}
+\end{figure}
+
+% Figure 4: Spread markers
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figure4_spread_markers.png}
+\caption{Spread with entry (^) and exit (v) markers. Insert \texttt{figure4_spread_markers.png} here.}
+\end{figure}
+
+% Figure 5: Cumulative PnL
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figure5_cum_pnl.png}
+\caption{Cumulative realized P\&L from closed trades. Insert \texttt{figure5_cum_pnl.png} here.}
+\end{figure}
+
+% Figure 6: M2M
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figure6_m2m.png}
+\caption{Mark-to-market (unrealized) P\&L while a trade is open. Insert \texttt{figure6_m2m.png} here.}
+\end{figure}
+
+% Figure 7: Histogram (if exists)
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{figure7_hist_pnl.png}
+\caption{Histogram of trade PnL. Insert \texttt{figure7_hist_pnl.png} here. If no trades were generated, this figure can be omitted.}
+\end{figure}
+
+% Figure 8: Rolling correlation
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figure8_rolling_corr.png}
+\caption{Rolling correlation of log returns (30-min window). Insert \texttt{figure8_rolling_corr.png} here.}
+\end{figure}
+
+\section{Preliminary Results and Figures}
+The toy backtest uses a simple mean-reversion entry/exit strategy on spread z-score. Summary statistics and
+trade table (if any) should be inserted here. For real-data runs, add transaction costs, exchange fees,
+and slippage to produce realistic P\&L numbers.
+
+\section{Very Rough Draft: Discussion \& Next Steps}
+\begin{itemize}
+  \item The synthetic example demonstrates the full analysis pipeline: preprocessing, spread computation, z-score signal generation, backtest, and visualization.
+  \item Next: run the pipeline with real tick data (Binance trades, Coinbase trades), recompute spread at higher frequency (seconds or ms), and repeat stability analysis from our DDE model to estimate critical delay $\tau_c$.
+  \item Incorporate realistic transaction costs (maker/taker), exchange transfer times, and order book depth simulation.
+  \item Produce a stability map comparing theoretical $\tau_c$ to empirical PnL decay as a function of latency.
+\end{itemize}
+
+\section{Files included}
+\begin{itemize}
+  \item \texttt{binance_forced_string.csv}
+  \item \texttt{coinbase_forced_string.csv}
+  \item \texttt{combined_with_spread_and_signals.csv}
+  \item Image files: \texttt{figure1\_price\_series.png}, \texttt{figure2\_spread.png}, \texttt{figure3\_spread\_zscore.png},
+  \texttt{figure4\_spread\_markers.png}, \texttt{figure5\_cum_pnl.png}, \texttt{figure6\_m2m.png}, \texttt{figure7\_hist\_pnl.png} (if present),
+  \texttt{figure8\_rolling\_corr.png}.
+\end{itemize}
+
+\end{document}
