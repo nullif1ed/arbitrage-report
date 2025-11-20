@@ -2,34 +2,45 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
-\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{2}{section.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2}Data Description and Preprocessing}{2}{section.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Summary of data columns used in the arbitrage analysis.}}{3}{table.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3}Exploratory Analysis and Visualization}{3}{section.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Price Series}{3}{subsection.3.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Hypothetical Binance and Coinbase BTC/USD price series over time. The minor fluctuations between the two exchanges mimic latency-driven price discrepancies.}}{3}{figure.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Spread Evolution}{4}{subsection.3.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Spread ($P_{Binance} - P_{Coinbase}$) showing persistent oscillation around zero. These deviations represent potential arbitrage entry points.}}{4}{figure.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Normalized Spread (Z-Score)}{4}{subsection.3.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Z-score of the spread computed over a rolling 30-minute window. High-magnitude z-scores indicate possible arbitrage opportunities when spreads deviate from equilibrium.}}{4}{figure.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Entry and Exit Markers}{5}{subsection.3.4}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Spread evolution with entry (upward triangles) and exit (downward triangles) markers based on the z-score thresholds. Positive z-score entries indicate selling Binance and buying Coinbase, and vice versa.}}{5}{figure.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Cumulative Realized P\&L}{5}{subsection.3.5}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Cumulative realized P\&L from executed trades. Despite transaction cost neglect, the shape indicates the potential profitability of the mean-reversion arbitrage approach.}}{5}{figure.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Mark-to-Market (Unrealized) P\&L}{6}{subsection.3.6}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Mark-to-market (unrealized) P\&L showing fluctuations during open positions. It captures intratrade volatility before final realization.}}{6}{figure.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.7}Distribution of Trade Profits}{6}{subsection.3.7}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Histogram of per-trade realized P\&L. The distribution suggests that most trades cluster near zero profit, consistent with small, frequent arbitrage captures.}}{6}{figure.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.8}Rolling Return Correlation}{7}{subsection.3.8}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Rolling correlation (30-minute window) of log returns between Binance and Coinbase. Strong co-movement ($r \approx 1$) reflects market efficiency, while short-term dips suggest temporary desynchronization exploitable for arbitrage.}}{7}{figure.8}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Critical Delay Estimation}{7}{section.4}\protected@file@percent }
-\newlabel{sec:criticaldelay}{{4}{7}{Critical Delay Estimation}{section.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Model Framework}{7}{subsection.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Empirical Estimation of Feedback Gain}{8}{subsection.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Grid Search for Delay-Dependent Gain}{8}{subsection.4.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Estimated feedback gain $\hat  {k}(\tau )$ as a function of assumed delay $\tau $. Stable regions correspond to $\hat  {k} > 0$.}}{8}{figure.9}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Estimated critical delay $\tau _c(\tau )$ computed from $\hat  {k}(\tau )$ using $\tau _c = \pi / (2\hat  {k})$. Finite $\tau _c$ values indicate the predicted onset of instability due to latency.}}{9}{figure.10}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Interpretation}{9}{subsection.4.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}Preliminary Results and Insights}{9}{section.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion and Next Steps}{10}{section.6}\protected@file@percent }
-\gdef \@abspage@last{10}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{3}{section.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Data Description and Preprocessing}{3}{section.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Summary of data columns used in the arbitrage analysis.}}{4}{table.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Exploratory Analysis and Visualization}{4}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Price Series}{4}{subsection.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Hypothetical Binance and Coinbase BTC/USD price series over time. The minor fluctuations between the two exchanges mimic latency-driven price discrepancies.}}{4}{figure.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Spread Evolution}{5}{subsection.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Spread ($P_{Binance} - P_{Coinbase}$) showing persistent oscillation around zero. These deviations represent potential arbitrage entry points.}}{5}{figure.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Normalized Spread (Z-Score)}{5}{subsection.3.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Z-score of the spread computed over a rolling 30-minute window. High-magnitude z-scores indicate possible arbitrage opportunities when spreads deviate from equilibrium.}}{5}{figure.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Entry and Exit Markers}{6}{subsection.3.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Spread evolution with entry (upward triangles) and exit (downward triangles) markers based on the z-score thresholds. Positive z-score entries indicate selling Binance and buying Coinbase, and vice versa.}}{6}{figure.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Cumulative Realized P\&L}{6}{subsection.3.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Cumulative realized P\&L from executed trades. Despite transaction cost neglect, the shape indicates the potential profitability of the mean-reversion arbitrage approach.}}{6}{figure.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Mark-to-Market (Unrealized) P\&L}{7}{subsection.3.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Mark-to-market (unrealized) P\&L showing fluctuations during open positions. It captures intratrade volatility before final realization.}}{7}{figure.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.7}Distribution of Trade Profits}{7}{subsection.3.7}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Histogram of per-trade realized P\&L. The distribution suggests that most trades cluster near zero profit, consistent with small, frequent arbitrage captures.}}{7}{figure.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.8}Rolling Return Correlation}{8}{subsection.3.8}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Rolling correlation (30-minute window) of log returns between Binance and Coinbase. Strong co-movement ($r \approx 1$) reflects market efficiency, while short-term dips suggest temporary desynchronization exploitable for arbitrage.}}{8}{figure.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Critical Delay Estimation}{8}{section.4}\protected@file@percent }
+\newlabel{sec:criticaldelay}{{4}{8}{Critical Delay Estimation}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Model Framework}{8}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Empirical Estimation of Feedback Gain}{9}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Grid Search for Delay-Dependent Gain}{9}{subsection.4.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Estimated feedback gain $\hat  {k}(\tau )$ as a function of assumed delay $\tau $. Stable regions correspond to $\hat  {k} > 0$.}}{9}{figure.9}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Estimated critical delay $\tau _c(\tau )$ computed from $\hat  {k}(\tau )$ using $\tau _c = \pi / (2\hat  {k})$. Finite $\tau _c$ values indicate the predicted onset of instability due to latency.}}{10}{figure.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Interpretation}{10}{subsection.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Preliminary Results and Insights}{10}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion and Next Steps}{11}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Theoretical Stochastic Model for Price Spread}{12}{section.7}\protected@file@percent }
+\newlabel{sec:stochastic-model}{{7}{12}{Theoretical Stochastic Model for Price Spread}{section.7}{}}
+\newlabel{eq:ou-delay}{{8}{12}{Theoretical Stochastic Model for Price Spread}{equation.7.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Discrete-time approximation and estimation}{12}{subsection.7.1}\protected@file@percent }
+\newlabel{eq:ar1}{{9}{12}{Discrete-time approximation and estimation}{equation.7.9}{}}
+\@writefile{toc}{\contentsline {paragraph}{Including delay.}{13}{section*.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Critical delay and stability (theory)}{13}{subsection.7.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Simulation: Euler--Maruyama scheme}{13}{subsection.7.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Practical Python implementation}{14}{subsection.7.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.5}Figures generated by the script}{16}{subsection.7.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.6}Interpretation and usage}{16}{subsection.7.6}\protected@file@percent }
+\gdef \@abspage@last{16}

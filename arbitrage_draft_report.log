@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.9.24)  12 NOV 2025 21:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.9.24)  20 NOV 2025 12:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -486,80 +486,160 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 25.
 (C:\Users\nicho\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-(arbitrage_draft_report.toc)
+(arbitrage_draft_report.toc [1
+
+{C:/Users/nicho/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}])
 \tf@toc=\write4
 \openout4 = `arbitrage_draft_report.toc'.
 
- [1
-
-{C:/Users/nicho/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2]
-<figure1_price_series.png, id=87, 722.7pt x 289.08pt>
+ [2] [3]
+<figure1_price_series.png, id=116, 722.7pt x 289.08pt>
 File: figure1_price_series.png Graphic file (type png)
 <use figure1_price_series.png>
 Package pdftex.def Info: figure1_price_series.png  used on input line 77.
 (pdftex.def)             Requested size: 422.77664pt x 169.1089pt.
-<figure2_spread.png, id=89, 722.7pt x 289.08pt>
+<figure2_spread.png, id=118, 722.7pt x 289.08pt>
 File: figure2_spread.png Graphic file (type png)
 <use figure2_spread.png>
 Package pdftex.def Info: figure2_spread.png  used on input line 84.
 (pdftex.def)             Requested size: 422.77664pt x 169.1089pt.
- [3 <./figure1_price_series.png>]
-<figure3_spread_zscore.png, id=98, 722.7pt x 289.08pt>
+ [4 <./figure1_price_series.png>]
+<figure3_spread_zscore.png, id=127, 722.7pt x 289.08pt>
 File: figure3_spread_zscore.png Graphic file (type png)
 <use figure3_spread_zscore.png>
 Package pdftex.def Info: figure3_spread_zscore.png  used on input line 91.
 (pdftex.def)             Requested size: 422.77664pt x 169.1089pt.
-<figure4_spread_markers.png, id=99, 722.7pt x 289.08pt>
+<figure4_spread_markers.png, id=128, 722.7pt x 289.08pt>
 File: figure4_spread_markers.png Graphic file (type png)
 <use figure4_spread_markers.png>
 Package pdftex.def Info: figure4_spread_markers.png  used on input line 98.
 (pdftex.def)             Requested size: 422.77664pt x 169.1089pt.
- [4 <./figure2_spread.png> <./figure3_spread_zscore.png>]
-<figure5_cum_pnl.png, id=108, 722.7pt x 289.08pt>
+ [5 <./figure2_spread.png> <./figure3_spread_zscore.png>]
+<figure5_cum_pnl.png, id=137, 722.7pt x 289.08pt>
 File: figure5_cum_pnl.png Graphic file (type png)
 <use figure5_cum_pnl.png>
 Package pdftex.def Info: figure5_cum_pnl.png  used on input line 105.
 (pdftex.def)             Requested size: 422.77664pt x 169.1089pt.
-<figure6_m2m.png, id=109, 722.7pt x 289.08pt>
+<figure6_m2m.png, id=138, 722.7pt x 289.08pt>
 File: figure6_m2m.png Graphic file (type png)
 <use figure6_m2m.png>
 Package pdftex.def Info: figure6_m2m.png  used on input line 112.
 (pdftex.def)             Requested size: 422.77664pt x 169.1089pt.
- [5 <./figure4_spread_markers.png> <./figure5_cum_pnl.png>]
-<figure7_hist_pnl.png, id=118, 578.16pt x 289.08pt>
+ [6 <./figure4_spread_markers.png> <./figure5_cum_pnl.png>]
+<figure7_hist_pnl.png, id=147, 578.16pt x 289.08pt>
 File: figure7_hist_pnl.png Graphic file (type png)
 <use figure7_hist_pnl.png>
 Package pdftex.def Info: figure7_hist_pnl.png  used on input line 119.
 (pdftex.def)             Requested size: 375.80544pt x 187.89977pt.
-<figure8_rolling_corr.png, id=119, 722.7pt x 289.08pt>
+<figure8_rolling_corr.png, id=148, 722.7pt x 289.08pt>
 File: figure8_rolling_corr.png Graphic file (type png)
 <use figure8_rolling_corr.png>
 Package pdftex.def Info: figure8_rolling_corr.png  used on input line 126.
 (pdftex.def)             Requested size: 422.77664pt x 169.1089pt.
- [6 <./figure6_m2m.png> <./figure7_hist_pnl.png>] [7 <./figure8_rolling_corr.pn
+ [7 <./figure6_m2m.png> <./figure7_hist_pnl.png>] [8 <./figure8_rolling_corr.pn
 g>]
-<figure9_k_vs_tau.png, id=142, 578.16pt x 289.08pt>
+<figure9_k_vs_tau.png, id=170, 578.16pt x 289.08pt>
 File: figure9_k_vs_tau.png Graphic file (type png)
 <use figure9_k_vs_tau.png>
 Package pdftex.def Info: figure9_k_vs_tau.png  used on input line 182.
 (pdftex.def)             Requested size: 399.29463pt x 199.64626pt.
-<figure10_tau_c_vs_tau.png, id=143, 578.16pt x 289.08pt>
+<figure10_tau_c_vs_tau.png, id=171, 578.16pt x 289.08pt>
 File: figure10_tau_c_vs_tau.png Graphic file (type png)
 <use figure10_tau_c_vs_tau.png>
 Package pdftex.def Info: figure10_tau_c_vs_tau.png  used on input line 188.
 (pdftex.def)             Requested size: 399.29463pt x 199.64626pt.
- [8 <./figure9_k_vs_tau.png>]
-
-LaTeX Warning: Reference `sec:criticaldelay' on page 9 undefined on input line 
-193.
-
-
+ [9 <./figure9_k_vs_tau.png>]
 Overfull \hbox (1.6762pt too wide) in paragraph at lines 201--202
 []\OT1/cmr/m/n/12 This the-o-ret-i-cal frame-work con-nects di-rectly to al-go-
 rith-mic trade ex-e-cu-tion speed, co-location
  []
 
-[9 <./figure10_tau_c_vs_tau.png>] [10] (arbitrage_draft_report.aux)
+[10 <./figure10_tau_c_vs_tau.png>] [11]
+
+LaTeX Warning: Reference `eq:ou-delay' on page 12 undefined on input line 265.
+
+[12] [13]
+Overfull \hbox (81.63199pt too wide) in paragraph at lines 334--335
+[]\OT1/cmr/m/n/12 saves di-ag-nos-tic plots: \OT1/cmtt/m/n/12 figure[]model[]fi
+t.png\OT1/cmr/m/n/12 , \OT1/cmtt/m/n/12 figure[]model[]sim.png\OT1/cmr/m/n/12 ,
+ \OT1/cmtt/m/n/12 figure[]power[]spectrum.png\OT1/cmr/m/n/12 . 
+ []
+
+
+Overfull \hbox (11.89522pt too wide) in paragraph at lines 412--412
+[]\OT1/cmtt/m/n/12 df = pd.read_csv("combined_with_spread_and_signals.csv", par
+se_dates=['time'])[] 
+ []
+
+
+Overfull \hbox (116.87027pt too wide) in paragraph at lines 412--412
+[]\OT1/cmtt/m/n/12 dt = (df['time'].iloc[1] - df['time'].iloc[0]).total_seconds
+()   # sampling interval in seconds[] 
+ []
+
+
+Overfull \hbox (61.29524pt too wide) in paragraph at lines 412--412
+[]\OT1/cmtt/m/n/12 print("Estimated OU params: kappa =", kappa_hat, "mu =", mu_
+hat, "sigma =", sigma_hat)[] 
+ []
+
+
+Overfull \hbox (92.17026pt too wide) in paragraph at lines 412--412
+[]\OT1/cmtt/m/n/12 # --- Optional: grid search over discrete delays for ds/dt =
+ -kappa(s-mu) - gamma*s_{t-lag}[] 
+ []
+
+[14]
+Overfull \hbox (48.94524pt too wide) in paragraph at lines 412--412
+[]    \OT1/cmtt/m/n/12 X2 = -np.concatenate([np.full(ell, np.nan), s[:-1 - ell]
+]) if ell>0 else -s[:-1][] 
+ []
+
+
+Overfull \hbox (246.54533pt too wide) in paragraph at lines 412--412
+[]\OT1/cmtt/m/n/12 plt.figure(); plt.plot(lags*dt/60., k_list, label='kappa_hat
+'); plt.plot(lags*dt/60., gamma_list, label='gamma_hat')[] 
+ []
+
+
+Overfull \hbox (240.37033pt too wide) in paragraph at lines 412--412
+[]\OT1/cmtt/m/n/12 plt.xlabel("Lag (minutes)"); plt.ylabel("Estimated coefficie
+nt"); plt.legend(); plt.savefig("figure_model_fit.png")[] 
+ []
+
+
+Overfull \hbox (431.79543pt too wide) in paragraph at lines 412--412
+[]\OT1/cmtt/m/n/12 plt.figure(); plt.plot(lags*dt/60., tau_c); plt.xlabel("Assu
+med delay (minutes)"); plt.ylabel("tau_c (s)"); plt.savefig("figure_tau_c_vs_la
+g.png")[] 
+ []
+
+
+Overfull \hbox (425.62042pt too wide) in paragraph at lines 412--412
+[]\OT1/cmtt/m/n/12 kappa = max(1e-12, kappa_hat); mu = mu_hat; gamma = np.nanme
+an([g for g in gamma_list if not np.isnan(g)]) if any(~np.isnan(gamma_list)) el
+se 0.0[] 
+ []
+
+
+Overfull \hbox (5.72021pt too wide) in paragraph at lines 412--412
+[]        \OT1/cmtt/m/n/12 drift = -kappa*(s_sim[path, n-1]-mu) - gamma*s_sim[p
+ath, n-1-ell_sim][] 
+ []
+
+
+Overfull \hbox (110.69527pt too wide) in paragraph at lines 412--412
+[]        \OT1/cmtt/m/n/12 s_sim[path, n] = s_sim[path, n-1] + drift*dt + sigma
+_hat*np.sqrt(dt)*np.random.randn()[] 
+ []
+
+
+Overfull \hbox (302.12036pt too wide) in paragraph at lines 412--412
+[]\OT1/cmtt/m/n/12 plt.figure(); plt.semilogy(f, Pxx); plt.xlabel("Frequency (H
+z)"); plt.ylabel("PSD"); plt.savefig("figure_power_spectrum.png")[] 
+ []
+
+[15] [16] (arbitrage_draft_report.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
@@ -577,17 +657,17 @@ Package rerunfilecheck Warning: File `arbitrage_draft_report.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `arbitrage_draft_report.out':
-(rerunfilecheck)             Before: 6FCA29C883DA9D735AFFB63F14419B61;2412
-(rerunfilecheck)             After:  989733E9E9853AA00E9E31F6F0ECD4AA;3356.
+(rerunfilecheck)             Before: 989733E9E9853AA00E9E31F6F0ECD4AA;3356
+(rerunfilecheck)             After:  84BB7B4454DB882825C1A45BB20D0BBE;5038.
  ) 
 Here is how much of TeX's memory you used:
- 14358 strings out of 474486
- 284295 string characters out of 5743755
- 1934542 words of memory out of 5000000
- 36440 multiletter control sequences out of 15000+600000
+ 14390 strings out of 474486
+ 284683 string characters out of 5743755
+ 1936542 words of memory out of 5000000
+ 36450 multiletter control sequences out of 15000+600000
  567645 words of font info for 73 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,9n,80p,449b,1079s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,9n,80p,449b,1172s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\nicho\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm
 1200.pk><C:/Users/nicho/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
 ts/cm/cmbx12.pfb><C:/Users/nicho/AppData/Local/Programs/MiKTeX/fonts/type1/publ
@@ -599,10 +679,11 @@ l/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/nicho/AppDa
 ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/ni
 cho/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/
 Users/nicho/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12
-.pfb>
-Output written on arbitrage_draft_report.pdf (10 pages, 973536 bytes).
+.pfb><C:/Users/nicho/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
+symbols/msbm10.pfb>
+Output written on arbitrage_draft_report.pdf (16 pages, 1011205 bytes).
 PDF statistics:
- 230 PDF objects out of 1000 (max. 8388607)
- 56 named destinations out of 1000 (max. 500000)
- 155 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 301 PDF objects out of 1000 (max. 8388607)
+ 78 named destinations out of 1000 (max. 500000)
+ 195 words of extra memory for PDF output out of 10000 (max. 10000000)
 
