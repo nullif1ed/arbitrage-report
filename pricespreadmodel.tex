@@ -1,185 +1,142 @@
-% ---------------------------
-\section{Theoretical Stochastic Model for Price Spread}
-\label{sec:stochastic-model}
+\documentclass[12pt]{article}
 
-We propose a parsimonious stochastic differential equation (SDE) model for the spread between Binance and Coinbase:
+% PACKAGES
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{physics}
+\usepackage{setspace}
+\geometry{margin=1in}
+\setstretch{1.15}
+
+\title{Theoretical Stochastic Model for Cryptocurrency Price Spreads}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Definition of Spread}
+
+Let
+\[
+P_{\mathrm{Bin}}(t), \qquad P_{\mathrm{Coin}}(t)
+\]
+be the instantaneous prices for Bitcoin on Binance and Coinbase.  
+The price spread is defined as:
+\[
+s(t) = P_{\mathrm{Bin}}(t) - P_{\mathrm{Coin}}(t).
+\]
+
+This document provides a self-contained theoretical model for the evolution of $s(t)$.
+
+\section{Stochastic Delay Model}
+
+We consider the following stochastic delay differential equation (SDDE) for the spread:
 \begin{equation}
-\label{eq:ou-delay}
-\frac{ds(t)}{dt} \;=\; -\kappa\big(s(t) - \mu\big) - \gamma\,s(t-\tau) \;+\; \sigma\,\xi(t),
+\label{eq:sde_delay}
+\frac{ds(t)}{dt}
+= -\kappa \big(s(t) - \mu\big)
+  - \gamma\, s(t-\tau)
+  + \sigma \,\xi(t),
 \end{equation}
-where
+where:
 \begin{itemize}
-  \item $s(t) = P_{\mathrm{Bin}}(t) - P_{\mathrm{Coin}}(t)$ is the instantaneous spread,
-  \item $\kappa\ge0$ is an instantaneous mean-reversion rate toward level $\mu$,
-  \item $\mu$ is the long-run mean spread,
-  \item $\gamma\ge0$ is a delayed feedback coefficient representing corrective action with latency $\tau\ge0$,
-  \item $\sigma>0$ is the noise amplitude,
-  \item $\xi(t)$ is white noise with $\mathbb{E}[\xi(t)]=0$ and $\mathbb{E}[\xi(t)\xi(t')] = \delta(t-t')$.
+    \item $\kappa > 0$ is the instantaneous mean-reversion rate,
+    \item $\mu$ is the long-run average spread,
+    \item $\gamma \ge 0$ is the delayed feedback (arbitrage pressure acting with latency),
+    \item $\tau > 0$ is the latency or reaction delay,
+    \item $\sigma > 0$ is the noise amplitude,
+    \item $\xi(t)$ is white noise.
 \end{itemize}
 
-Equation~\eqref{eq:ou-delay} generalizes the Ornstein--Uhlenbeck (OU) process by adding a delayed feedback term. Setting $\gamma=0$ reduces to the standard OU model:
-\[
-ds(t) = -\kappa (s(t)-\mu)\,dt + \sigma\,dW_t,
-\]
-where $W_t$ is a standard Wiener process.
+The term $-\kappa(s(t)-\mu)$ captures short-term reversion, while $-\gamma s(t-\tau)$ models arbitrageurs correcting mispricings with finite delay.
 
-\subsection{Discrete-time approximation and estimation}
-The data are sampled at a uniform interval $\Delta t$ (e.g., 60 seconds). Using the Euler discretization for the OU part, without delay, we approximate:
-\[
-s_{n+1} = s_n + -\kappa(s_n - \mu)\Delta t + \sigma\sqrt{\Delta t}\,\epsilon_{n},\qquad \epsilon_n\stackrel{\text{i.i.d.}}{\sim}\mathcal N(0,1).
-\]
-A common closed-form least-squares estimator for the OU parameters (when $\gamma=0$) can be derived from the discrete-time autoregressive form:
+\section{Ornstein--Uhlenbeck Special Case}
+
+If $\gamma = 0$, the model reduces to the classical Ornstein--Uhlenbeck (OU) process:
+\begin{equation}
+ds(t) = -\kappa (s(t)-\mu)\,dt + \sigma\,dW_t,
+\end{equation}
+with $W_t$ a Wiener process.
+
+The OU process is mean-reverting and Gaussian, making it a standard baseline for spread modeling.
+
+\section{Discrete-Time Approximation}
+
+For observations sampled at interval $\Delta t$, the Euler–Maruyama discretization of \eqref{eq:sde_delay} is:
+\begin{equation}
+\label{eq:disc_full}
+s_{n+1}
+=
+s_n
+- \kappa (s_n - \mu)\Delta t
+- \gamma s_{n-\ell}\Delta t
++ \sigma\sqrt{\Delta t}\,\varepsilon_n,
+\end{equation}
+where $\varepsilon_n \sim \mathcal{N}(0,1)$ and $\ell = \tau/\Delta t$ is the integer delay.
+
+\subsection{OU Discrete Form}
+
+If $\gamma=0$, \eqref{eq:disc_full} becomes the AR(1) representation:
 \begin{equation}
 \label{eq:ar1}
-s_{n+1} = \phi\, s_n + (1-\phi)\mu + \eta_n,\qquad \phi = 1-\kappa\Delta t,
-\end{equation}
-where $\eta_n\sim\mathcal N(0,\sigma^2\Delta t)$.
-
-Estimators (method-of-moments / OLS) for $\phi, \mu$:
-\[
-\hat\phi = \frac{\sum_{n=0}^{N-1} (s_n-\bar{s})(s_{n+1}-\bar{s})}{\sum_{n=0}^{N-1} (s_n-\bar{s})^2},
+s_{n+1}
+= \phi s_n + (1-\phi)\mu + \eta_n,
 \qquad
-\hat\mu = \bar{s}\frac{1-\hat\phi}{1-\hat\phi},
-\]
-or more stably:
+\phi = 1 - \kappa \Delta t,
+\end{equation}
+with innovations $\eta_n \sim \mathcal{N}(0, \sigma^2 \Delta t)$.
+
+\section{Critical Delay and Stability}
+
+Ignoring noise, the delay-only equation:
 \[
-\hat\phi = \frac{\sum (s_n - \bar s)(s_{n+1}-\bar s)}{\sum (s_n - \bar s)^2},\qquad \hat\kappa = \frac{1-\hat\phi}{\Delta t}.
+\dot{s}(t) = -\gamma s(t-\tau)
 \]
-Noise amplitude estimator:
+has characteristic equation:
 \[
-\widehat{\sigma}^2 \;=\; \frac{1}{(N-1)\Delta t}\sum_{n=0}^{N-1}\big(s_{n+1} - \hat\phi s_n - (1-\hat\phi)\hat\mu\big)^2.
+\lambda + \gamma e^{-\lambda \tau} = 0.
 \]
 
-\paragraph{Including delay.} If the delayed term is important, we can include a discrete lag $\ell$ corresponding to $\tau=\ell\Delta t$ and regress
+A pair of purely imaginary roots appears when:
 \[
-\frac{s_{n+1}-s_n}{\Delta t} \approx -\kappa (s_n-\mu) - \gamma s_{n-\ell} + \varepsilon_n,
+\tau = \tau_c = \frac{\pi}{2\gamma}.
 \]
-using OLS across a grid of candidate lags $\ell$ to find a stabilizing $\gamma\ge0$ and the best-fitting $\tau=\ell\Delta t$ (see the grid-search algorithm in the code below).
 
-\subsection{Critical delay and stability (theory)}
-Ignoring noise and instantaneous mean-reversion for simplicity (set $\kappa=\mu=0$), the linear delay differential equation
-\[
-\dot s(t) = -\gamma s(t-\tau)
-\]
-has characteristic equation $\lambda + \gamma e^{-\lambda\tau}=0$. The smallest critical delay at which a pair of purely imaginary roots $\lambda=i\omega$ appears is
-\[
-\tau_c = \frac{\pi}{2\gamma}.
-\]
-In the general case where both $\kappa$ and $\gamma$ are present, the stability boundary is found by solving
-\[
-\lambda + \kappa + \gamma e^{-\lambda\tau} = 0,
-\]
-and the critical delay must be computed numerically (or approximated using root-finding in MATLAB/Python).
-
-\subsection{Simulation: Euler--Maruyama scheme}
-To visualize model behavior including randomness, simulate the SDE with Euler--Maruyama:
-\[
-s_{n+1} = s_n + \big[-\kappa(s_n-\mu) - \gamma s_{n-\ell}\big]\Delta t + \sigma\sqrt{\Delta t}\,\epsilon_n,
-\]
-with $\ell=\tau/\Delta t$ (integer lag). Initialize the first $\ell$ values using historical data or a burn-in sample.
-
-\subsection{Practical Python implementation}
-Below is a self-contained Python script you can run locally (or on Colab). It:
-\begin{enumerate}
-  \item loads \texttt{combined\_with\_spread\_and\_signals.csv},
-  \item computes $\Delta t$,
-  \item fits the OU parameters with optional delay grid search,
-  \item computes the theoretical $\tau_c$ when applicable,
-  \item simulates several stochastic sample paths,
-  \item saves diagnostic plots: \texttt{figure\_model\_fit.png}, \texttt{figure\_model\_sim.png}, \texttt{figure\_power\_spectrum.png}.
-\end{enumerate}
-
-\begin{verbatim}
-# ====== save as fit_and_simulate_spread.py ======
-import numpy as np, pandas as pd, math, matplotlib.pyplot as plt
-from scipy import signal
-
-# Load aligned combined CSV (must contain columns: time, spread)
-df = pd.read_csv("combined_with_spread_and_signals.csv", parse_dates=['time'])
-df = df.sort_values('time').reset_index(drop=True)
-dt = (df['time'].iloc[1] - df['time'].iloc[0]).total_seconds()   # sampling interval in seconds
-s = df['spread'].values
-N = len(s)
-
-# --- Fit OU (no delay) via AR(1) OLS ---
-s_mean = s.mean()
-num = np.sum((s[:-1]-s_mean)*(s[1:]-s_mean))
-den = np.sum((s[:-1]-s_mean)**2)
-phi = num/den
-kappa_hat = (1 - phi)/dt
-mu_hat = s_mean  # approx
-resid = s[1:] - (phi*s[:-1] + (1-phi)*mu_hat)
-sigma_hat = np.sqrt(np.sum(resid**2)/((N-1)*dt))
-
-print("Estimated OU params: kappa =", kappa_hat, "mu =", mu_hat, "sigma =", sigma_hat)
-
-# --- Optional: grid search over discrete delays for ds/dt = -kappa(s-mu) - gamma*s_{t-lag}
-max_lag_seconds = 300    # search up to 5 minutes (adjust)
-max_lag_steps = int(round(max_lag_seconds/dt))
-lags = np.arange(0, max_lag_steps+1)
-k_list, gamma_list = [], []
-for ell in lags:
-    # build X matrix with columns [- (s_n - mu), - s_{n-ell}]
-    # align arrays so indices exist
-    idx_start = max(1, ell)
-    Y = (s[1:] - s[:-1]) / dt
-    X1 = -(s[:-1] - mu_hat)
-    X2 = -np.concatenate([np.full(ell, np.nan), s[:-1 - ell]]) if ell>0 else -s[:-1]
-    mask = ~np.isnan(X2)
-    # align lengths
-    Y2, X12, X22 = Y[mask], X1[mask], X2[mask]
-    if len(Y2) < 10:
-        k_list.append(np.nan); gamma_list.append(np.nan); continue
-    # OLS estimate for [kappa, gamma]
-    Xmat = np.vstack([X12, X22]).T
-    beta = np.linalg.lstsq(Xmat, Y2, rcond=None)[0]
-    k_list.append(beta[0]); gamma_list.append(beta[1])
-
-# Save diagnostic plot of kappa/gamma vs lag
-plt.figure(); plt.plot(lags*dt/60., k_list, label='kappa_hat'); plt.plot(lags*dt/60., gamma_list, label='gamma_hat')
-plt.xlabel("Lag (minutes)"); plt.ylabel("Estimated coefficient"); plt.legend(); plt.savefig("figure_model_fit.png")
-
-# --- Compute tau_c for positive gamma where applicable ---
-tau_c = [ (math.pi/(2*g)) if (g>0) else np.nan for g in gamma_list ]
-plt.figure(); plt.plot(lags*dt/60., tau_c); plt.xlabel("Assumed delay (minutes)"); plt.ylabel("tau_c (s)"); plt.savefig("figure_tau_c_vs_lag.png")
-
-# --- Simulation (Euler-Maruyama) using fitted params ---
-kappa = max(1e-12, kappa_hat); mu = mu_hat; gamma = np.nanmean([g for g in gamma_list if not np.isnan(g)]) if any(~np.isnan(gamma_list)) else 0.0
-ell_sim =  int(round(60.0/dt))  # example: 60s delay
-T = N
-s_sim = np.zeros((5, T))
-for path in range(5):
-    # initialize with observed first values
-    s_sim[path, :ell_sim+1] = s[:ell_sim+1]  # burn-in
-    for n in range(ell_sim+1, T):
-        drift = -kappa*(s_sim[path, n-1]-mu) - gamma*s_sim[path, n-1-ell_sim]
-        s_sim[path, n] = s_sim[path, n-1] + drift*dt + sigma_hat*np.sqrt(dt)*np.random.randn()
-
-plt.figure(figsize=(10,4))
-for p in range(5):
-    plt.plot(df['time'], s_sim[p,:], alpha=0.7)
-plt.title("Simulated Spread Sample Paths (Euler-Maruyama)")
-plt.savefig("figure_model_sim.png")
-
-# --- Power spectral density of spread (optional) ---
-f, Pxx = signal.welch(s - s.mean(), fs=1.0/dt, nperseg=min(256, N))
-plt.figure(); plt.semilogy(f, Pxx); plt.xlabel("Frequency (Hz)"); plt.ylabel("PSD"); plt.savefig("figure_power_spectrum.png")
-\end{verbatim}
-
-\subsection{Figures generated by the script}
-The script saves the following PNGs you can include in the LaTeX report:
+Thus:
 \begin{itemize}
-  \item \texttt{figure\_model\_fit.png} — estimated coefficients vs assumed lag,
-  \item \texttt{figure\_tau\_c\_vs\_lag.png} — implied $\tau_c$ under delay grid,
-  \item \texttt{figure\_model\_sim.png} — simulated sample paths (Euler–Maruyama),
-  \item \texttt{figure\_power\_spectrum.png} — spread power spectral density diagnostic.
+    \item If $\tau < \tau_c$, the spread is stable and returns toward $0$.
+    \item If $\tau > \tau_c$, oscillations can arise due to delayed arbitrage reaction.
 \end{itemize}
 
-\subsection{Interpretation and usage}
+In the general case with both $\kappa$ and $\gamma$, stability boundaries require numerical root finding for:
+\[
+\lambda + \kappa + \gamma e^{-\lambda \tau} = 0.
+\]
+
+\section{Simulation Equation}
+
+To simulate the stochastic spread dynamics, use the discrete form:
+\[
+s_{n+1}
+=
+s_n
++
+\left[-\kappa(s_n - \mu)
+      - \gamma s_{n-\ell}\right]\Delta t
++ \sigma\sqrt{\Delta t}\,\varepsilon_n.
+\]
+
+Initial conditions $s_0, s_1, \dots, s_\ell$ can be set from historical data or through a short burn-in period.
+
+\section{Summary}
+
+This standalone document provides a complete stochastic and delay-based model for cryptocurrency exchange price spreads. The model:
 \begin{itemize}
-  \item If the fitted delayed coefficient $\hat\gamma>0$, compute $\hat\tau_c=\pi/(2\hat\gamma)$ to quantify the latency threshold beyond which oscillatory instabilities may appear.
-  \item Randomness parameter $\sigma$ determines typical fluctuation magnitude: larger $\sigma$ creates noisier spreads and makes reliable feedback estimation harder—use larger sample sizes or regularized estimation.
-  \item The simulation tool lets you experiment with $\kappa,\gamma,\tau,\sigma$ to understand the regime where latency causes oscillations or degraded P\&L.
+    \item incorporates mean-reversion,
+    \item includes latency-induced feedback,
+    \item provides a stability condition via critical delay $\tau_c$,
+    \item supports simulation through a discrete stochastic update rule.
 \end{itemize}
 
-% ---------------------------
+\end{document}
